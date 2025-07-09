@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { GlobalProvider } from "@/contexts/GlobalContext";
 import "@/global.css";
@@ -24,14 +25,15 @@ export default function RootLayout() {
 
 
         </Stack> */}
-        <Drawer>
-          <Drawer.Screen name="index" options={{drawerLabel: 'Home', headerTitle: 'My Home', headerShown: false}}/>
-          <Drawer.Screen name="my-baby" options={{drawerLabel: 'My Baby', headerTitle: 'My Home', headerShown: false}}/>
-          <Drawer.Screen name="measurement-report" options={{ headerShown: false}}/>
-          <Drawer.Screen name="diary" options={{ headerShown: false}}/>
-          <Drawer.Screen name="note" options={{ headerShown: false}}/>
         
-        </Drawer>
+          <Drawer screenOptions={{}} drawerContent={(props)=><Sidebar {...props}/>}>
+            <Drawer.Screen name="index" options={{drawerLabel: 'Home', headerTitle: 'My Home', headerShown: false}}/>
+            <Drawer.Screen name="my-baby" options={{drawerLabel: 'My Baby', headerTitle: 'My Home', headerShown: false}}/>
+            <Drawer.Screen name="measurement-report" options={{ headerShown: false}}/>
+            <Drawer.Screen name="diary" options={{ headerShown: false}}/>
+            <Drawer.Screen name="note" options={{ headerShown: false}}/>
+          
+          </Drawer>
         <StatusBar style="auto" />
       </AuthProvider>
     </GlobalProvider>

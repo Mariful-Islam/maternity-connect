@@ -1,4 +1,5 @@
 import BottomTabs from "@/components/BottomTabs";
+import { getNext7Days } from "@/utils/getDays";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { DrawerActions } from "@react-navigation/native";
@@ -7,17 +8,20 @@ import { router, useNavigation } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
-    Dimensions,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const dimension = Dimensions.get("window");
 
 const Diary = () => {
   const navigation = useNavigation();
+
+  const days = getNext7Days()
 
   const onToggleDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -52,6 +56,28 @@ const Diary = () => {
             <Text className="text-center text-[#7C0A64] text-3xl font-bold">
               My Baby
             </Text>
+          </View>
+
+          <View className="bg-[#7C0A64] rounded-lg p-4">
+            <Text className="text-white text-xl font-bold">Diary</Text>
+            <View className="w-full flex items-end border-b border-white">
+              <Text className="text-white">Month</Text>
+            </View>
+            <View className="flex flex-row items-center mt-4">
+              <AntDesign name="left" size={24} color="white" />
+              
+              <ScrollView horizontal contentContainerStyle={{display: 'flex', flexDirection: 'row', gap: 8}}>
+                {days.map((day, i)=>(
+                  <View key={i} className=" border border-white rounded-xl p-2 flex items-center">
+                    <Text className="text-white font-bold">{day.date.split("-").slice(-1)}</Text>
+                    <Text className="text-white font-bold">{day.weekday.slice(0,3)}</Text>
+                  </View>
+                ))}
+              </ScrollView>
+
+              <AntDesign name="right" size={24} color="white" />
+            </View>
+            
           </View>
 
           <View className="flex flex-row gap-6 flex-wrap justify-between mt-4">
@@ -112,14 +138,11 @@ const Diary = () => {
 
           <View className="mt-8">
             <TouchableOpacity
-                onPress={()=>router.push('/note')}
+              onPress={() => router.push("/note")}
               className="flex flex-row gap-6 items-start bg-[#eeeeee] px-8 py-4 rounded-lg"
-              
             >
               <View className="flex items-center">
-                <Text className="text-xl font-bold text-[#7C0A64]">
-                  Note
-                </Text>
+                <Text className="text-xl font-bold text-[#7C0A64]">Note</Text>
 
                 <Image
                   source={require("@/assets/images/note.svg")}
@@ -127,7 +150,9 @@ const Diary = () => {
                   style={{ height: 50, width: 50 }}
                 />
               </View>
-              <Text className="w-[200px] text-lg">First n words. Then open the next screen with full notes.</Text>
+              <Text className="w-[200px] text-lg">
+                First n words. Then open the next screen with full notes.
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
