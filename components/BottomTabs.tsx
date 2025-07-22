@@ -1,6 +1,7 @@
 import { Image } from "expo-image";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 
 interface BottomTabsProps {
   color?: 'pink' | 'white'
@@ -9,6 +10,8 @@ interface BottomTabsProps {
 const BottomTabs = ({color='white'}: BottomTabsProps) => {
   return (
     <View className="relative pt-12">
+
+
       <View className="flex items-center  ">
     
         <View 
@@ -53,3 +56,31 @@ const BottomTabs = ({color='white'}: BottomTabsProps) => {
 };
 
 export default BottomTabs;
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: 80,
+    alignItems: 'center',
+  },
+  svg: {
+    position: 'absolute',
+    bottom: 0,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+  centerButton: {
+    position: 'absolute',
+    bottom: 15,
+    alignSelf: 'center',
+  },
+});
